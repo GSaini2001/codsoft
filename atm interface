@@ -1,0 +1,104 @@
+
+import java.util.Scanner;
+class User {
+    double balance;
+    int pin;
+    static int acc_num=1111;
+    String username;
+    int acc_no;
+    int length_pin;
+    void createacc() {
+        acc_no = acc_num;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter the name of the account holder");
+        username = sc.nextLine();
+
+        do {
+            System.out.println("enter a 4 digit pin");
+            pin = sc.nextInt();
+            length_pin = String.valueOf(pin).length();
+
+        } while (length_pin != 4);
+        System.out.println("congratulations account created successfully ");
+        System.out.println("the account details are");
+        System.out.println("the account holder name is  "+username);
+        System.out.println("the account number is    "+acc_no );
+        System.out.println("thankyou");
+    }
+
+}
+public class ATM{
+    double balance;
+    User user;
+    ATM(User user){
+        this.user=user;
+        this.balance= user.balance;
+
+    }
+    void check() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter the 4 digit pin " + user.username + " to access the ATM");
+        int epin = sc.nextInt();
+        if (epin == user.pin) {
+            System.out.println("welcome");
+            start();
+        } else {
+            System.out.println("incorrect pin entered ");
+            System.out.println("exiting...");
+
+        }
+
+    }
+        void start(){
+        System.out.println("1.check balance");
+        System.out.println("2.withdraw money");
+        System.out.println("3.deposit money");
+        System.out.println("4.exit");
+        System.out.println("enter the option");
+        Scanner s=new Scanner(System.in);
+        int opt=s.nextInt();
+        if(opt==1){
+            checkbal();
+        } else if (opt==2) {
+
+            System.out.println("Enter the amount to withdraw");
+            Scanner SC=new Scanner(System.in);
+            double withdrawamt=SC.nextDouble();
+            withdraw(withdrawamt);
+        } else if (opt==3) {
+            System.out.println("Enter the amount to deposit");
+            double depositamt=s.nextDouble();
+            deposit(depositamt);
+        }
+        else {
+            System.out.println("thank you "+user.username);
+        }
+    }
+    void withdraw(double amount){
+        if (amount>=balance){
+            System.out.println("insufficient balance");
+        }
+        else {
+            balance=balance-amount;
+            System.out.println("withdrawal successful");
+        }
+        start();
+    }
+    void deposit(double amount){
+
+       balance=balance+amount;
+       start();
+    }
+    void checkbal(){
+        System.out.println("your balance is"+balance);
+        start();
+    }
+    public static void main(String[]args){
+        User user=new User();
+        user.createacc();
+       ATM atm=new ATM(user);
+       atm.check();
+
+
+    }
+}
