@@ -1,0 +1,55 @@
+import java.util.Scanner;
+import  java.util.Random;
+public class numbergame {
+    int compnum;
+    int usernum;
+    int counter = 0;
+
+
+    public numbergame() {
+        Random r = new Random();
+        compnum = r.nextInt(100);
+    }
+
+    public void usesrinput() {
+        System.out.println("enter a number between 0  and 100");
+        Scanner sc = new Scanner(System.in);
+        usernum = sc.nextInt();
+        setcounter();
+    }
+
+    public void iscorrectnum() {
+
+        if (compnum == usernum) {
+            System.out.println("congratulations you guessed the right number");
+        } else if (compnum < usernum) {
+            System.out.println(" The guess is incorrect,guess a number smaller");
+        } else {
+            System.out.println("The guess is incorrect guess a greater number");
+        }
+
+    }
+
+    public void setcounter() {
+        counter++;
+    }
+
+    public void gecounter() {
+        System.out.println("the number of guesses taken are" + " " + counter);
+    }
+
+    public static void main(String[] args) {
+        numbergame g = new numbergame();
+        boolean correctguess = false;
+        while (!correctguess) {
+            g.usesrinput();
+            g.iscorrectnum();
+            if (g.compnum == g.usernum)
+            {
+                correctguess = true;
+                g.gecounter();
+            }
+
+        }
+    }
+}
