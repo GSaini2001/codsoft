@@ -1,0 +1,24 @@
+import java.util.Scanner;
+import java.lang.String;
+public class wordcount {
+public static void main(String args[]){
+    System.out.println("enter a string");
+    Scanner sc =new Scanner(System.in);
+    String s=sc.nextLine();
+    int length = s.length();
+    int count=1;
+    int pcount=0;
+    for(int i=0;i<length;i++){
+        if((s.charAt(i)==' ' )&&(s.charAt(i+1)!=' ')){
+            count++;
+        }
+            else if ((s.charAt(i)==',')||(s.charAt(i)==';')||(s.charAt(i)=='?')||(s.charAt(i)=='.')){
+                pcount++;
+            }
+
+    }
+    System.out.println("The number of words are   "+count);
+    System.out.println("The number of punctuation marks are  "+pcount);
+}
+}
+
